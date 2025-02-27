@@ -351,6 +351,7 @@ sudo systemctl restart jenkins
    - Launch EC2 instance t2.medium
    - storage 20Gb
    - allocate EIP for this instance
+   - open port 9090 for prometheus
 
    First, create a dedicated Linux user for Prometheus and download Prometheus:
 
