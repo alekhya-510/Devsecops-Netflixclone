@@ -110,9 +110,10 @@
     #jenkins
     sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
     https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-    echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
     https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
     /etc/apt/sources.list.d/jenkins.list > /dev/null
+
     sudo apt-get update
     sudo apt-get install jenkins
     sudo systemctl start jenkins
@@ -181,7 +182,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/N4si/DevSecOps-Project.git'
+                git branch: 'main', url: 'https://github.com/alekhya-510/Devsecops-Netflixclone.git'
             }
         }
         stage("Sonarqube Analysis") {
@@ -246,7 +247,7 @@ Certainly, here are the instructions without step numbers:
   - Go to "Dashboard" → "Manage Jenkins" → "Manage Credentials."
   - Click on "System" and then "Global credentials (unrestricted)."
   - Click on "Add Credentials" on the left side.
-  - Choose "Secret text" as the kind of credentials.
+  - Choose "Username and password" as the kind of credentials.
   - Enter your DockerHub credentials (Username and Password) and give the credentials an ID (e.g., "docker").
   - Click "OK" to save your DockerHub credentials.
 
@@ -271,7 +272,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/N4si/DevSecOps-Project.git'
+                git branch: 'main', url: 'https://github.com/alekhya-510/Devsecops-Netflixclone.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -309,9 +310,9 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build --build-arg TMDB_V3_API_KEY=<yourapikey> -t netflix ."
-                       sh "docker tag netflix nasi101/netflix:latest "
-                       sh "docker push nasi101/netflix:latest "
+                       sh "docker build --build-arg TMDB_V3_API_KEY=03798d317f5285f1c8cdf194d1095f78 -t netflix ."
+                       sh "docker tag netflix alekhya510/netflix:latest "
+                       sh "docker push alekhya510/netflix:latest "
                     }
                 }
             }
@@ -323,7 +324,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name netflix -p 8081:80 nasi101/netflix:latest'
+                sh 'docker run -d -p 8081:80 alekhya510/netflix:latest'
             }
         }
     }
@@ -346,10 +347,15 @@ sudo systemctl restart jenkins
    Set up Prometheus and Grafana to monitor your application.
 
    **Installing Prometheus:**
+   Create a seperate server for monitoring purpose :
+   - Launch EC2 instance t2.medium
+   - storage 20Gb
+   - allocate EIP for this instance
 
    First, create a dedicated Linux user for Prometheus and download Prometheus:
 
    ```bash
+   sudo apt update
    sudo useradd --system --no-create-home --shell /bin/false prometheus
    wget https://github.com/prometheus/prometheus/releases/download/v2.47.1/prometheus-2.47.1.linux-amd64.tar.gz
    ```
@@ -496,7 +502,7 @@ sudo systemctl restart jenkins
 
    You can access Node Exporter metrics in Prometheus.
 
-2. **Configure Prometheus Plugin Integration:**
+3. **Configure Prometheus Plugin Integration:**
 
    Integrate Jenkins with Prometheus to monitor the CI/CD pipeline.
 
