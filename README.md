@@ -40,6 +40,7 @@
     
 - Build and run your application using Docker containers:
     Since we are cloning the netflix we need API key for integration, for that we have used TMDB key and it should be passed as build argument while building.
+
   **TMDB API Key generation:**
      - Here we are generating with TMDB for that create tmdb account,after creating account login and select settings.
      - Click on "API" from the left-side panel.
