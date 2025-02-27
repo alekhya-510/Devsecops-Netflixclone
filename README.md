@@ -52,7 +52,8 @@
     docker build --build-arg TMDB_V3_API_KEY=03798d317f5285f1c8cdf194d1095f78 -t netflix .
     docker run -d --name netflix -p 8081:80 netflix:latest
    ```
-    We need to open the port 8081 in ec2 security group and application can be accessed with https://<public-ip>:8081 as below hurray 
+  We need to open the port 8081 in ec2 security group.open other ports such as 8080 for jenkins and 9000 for sonarqube 
+  Application can be accessed with https://<public-ip>:8081 as below hurray 
     
 <img width="1728" alt="Screenshot 2025-02-27 at 19 41 11" src="https://github.com/user-attachments/assets/4c1a93c4-eb68-4484-8177-b679bf146664" />
 
